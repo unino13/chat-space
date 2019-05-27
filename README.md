@@ -5,16 +5,14 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false, unique: true|
-|name|strings|null: false|
+|name|string|null: false, index: true|
 |e-mail|string|null: false, foreign_key: false, unique: true|
 |password|string|null: false|
 
 ###Assosiation
-- has_many :messages, through :groups_messages
-- has_many :groups
-- has_many :members
-- belongs_to :group
+- has_many :messages
+- has_many :groups, through :members
+- has_many :member
 
 
 ## membersテーブル
@@ -34,21 +32,20 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|group_id|integer|null :false|
-|group_name|strings|null :false|
-|name|strings|null :false, foreign_key :true|
-|user_id|integer|null :false, foreign_key :true|
+|group_name|string|null :false|
 
 ### Assosiation
-- has_many :users
+- has_many :users, through :members
 - has_many :messages
+- has_many :members
+
 
 ## messagesテーブル
 
 |Column|Type|Options|
 |------|----|-------|
-|body|text|null :false|
-|image|strings|null :true|
+|body|text||
+|image|string||
 |user_id|integer|null :false, foreign_key :true|
 |group_id|integer|null :false, foreign_key :true|
 
